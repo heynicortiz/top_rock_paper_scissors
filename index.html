@@ -3,9 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>Rock, Paper, Scissors!</title>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+    <style> @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Permanent+Marker&family=Rubik+80s+Fade&family=Rubik+Vinyl&display=swap'); </style>
+
+    <style>
+        .fai-large {
+            font-size: 120px;
+        }
+
+        .fai-previous {
+            font-size: 28px;
+        }
+
+        body {
+            font-family: "Permanent Marker";
+        }
+    </style>
 </head>
-<body>
-<script src="rps.js"></script>
+<body class="w-100 debug">
+<script src="rps.js" defer></script>
+
+<header class="center tc">
+    <h1 class="f1" id="pageTitle">Rock, Paper, Scissors, Go!</h1>
+</header>
+
+<div id="mainContainer" class="w-100 w-80-ns center">
+    <div id="welcomeOrResult" class="w-100">
+
+    </div>
+
+    <div id="selections"  class="cb w-100">
+        <div id="playerSelection" class="fl w-100 w-50-ns tc">
+            <h2 class="f2 mv0">Player</h2>
+            <div id="playerCurrent" class="w-100 tc mv2">
+                <i class="far fa-question-circle fai-large"></i>
+            </div>
+
+            <div id="playerScore" class="w-100 tc">
+                <span class="score f3 dib ma2">0</span>
+            </div>
+
+            <div id="playerHistory" class="w-100 tc">
+                <!-- to be filled in with JS -->
+            </div>
+
+        </div>
+
+        <div id="computerSelection" class="fl w-100 w-50-ns tc">
+            <h2 class="f2 mv0">Computer</h2>
+            <div id="computerCurrent" class="w-100 tc mv2">
+                <i class="far fa-question-circle fai-large"></i>
+            </div>
+
+            <div id="computerScore" class="w-100 tc">
+                <span class="score f3 dib ma2">0</span>
+            </div>
+
+            <div id="computerHistory" class="w-100 tc">
+                <!-- to be filled in with JS -->
+            </div>
+        </div>
+    </div>
+
+    <div id="playerInput" class="cb w-100 center tc">
+        <h2 class="f2 mv1">Make Your Selection</h2>
+        <span class="f4 db mb2" id="rulesVictory">First to 5 wins!</span>
+        <div class="inputChoice fl w-third green fai-large">
+            <i class=" far fa-hand-rock"></i>
+        </div>
+
+        <div class="inputChoice fl w-third green fai-large">
+            <i class="far fa-hand-paper"></i>
+        </div>
+
+        <div class="inputChoice fl w-third green fai-large">
+            <i class="far fa-hand-scissors"></i>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
