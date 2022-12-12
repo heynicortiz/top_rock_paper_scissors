@@ -1,6 +1,27 @@
+// document elements
+const playerScoreDiv = document.querySelector("#playerScore .score");
+const makeYourSelection = document.querySelector("#makeYourSelection");
+const declare = document.querySelector("#rulesVictory");
+const inputChoices = document.querySelector("#inputChoices");
+const mainContainer = document.querySelector("#mainContainer");
+const repeat = document.querySelector("#repeat");
+const computerScoreDiv = document.querySelector("#computerScore .score");
+const playerCurrent = document.querySelector("#playerCurrent .fai-large");
+const computerCurrent = document.querySelector("#computerCurrent .fai-large");
+const playerHistory = document.querySelector("#playerHistory");
+const computerHistory = document.querySelector("#computerHistory");
+
 // initial both scores
 let playerScore = 0;
 let computerScore = 0;
+
+// activate buttons
+const playerOptions = document.querySelectorAll(".inputButton");
+playerOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+        playRound(option.id, getComputerChoice());
+    });
+});
 
 // Use a random value to determine computer choice
 function getComputerChoice() {
@@ -9,90 +30,64 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let result;
     selectionsMade(playerSelection, computerSelection);
 
-    let declare = document.querySelector("#rulesVictory");
-
     if (playerSelection === computerSelection) {
-        result = "draw!";
         declare.textContent = "Draw!"
     } else if (
         playerSelection === "rock" && computerSelection === "scissors" ||
         playerSelection === "paper" && computerSelection === "rock" ||
         playerSelection === "scissors" && computerSelection === "paper"
     ) {
-        result = "player wins!";
         declare.textContent = "Player wins that round!";
-        updatePlayerScore();
+        playerScore++;
+        playerScoreDiv.textContent = playerScore.toString();
     } else {
-        result = "player loses!";
         declare.textContent = "Player loses that round!";
-        updateComputerScore();
+        computerScore++;
+        computerScoreDiv.textContent = computerScore.toString();
     }
 
-    return result + ": " + playerSelection + " vs " + computerSelection;
+
+    if (playerScore >= 5 || computerScore >= 5) {
+        declare.classList.add("blue", "f2");
+        declare.classList.remove("f4");
+        makeYourSelection.classList.add("dn");
+        inputChoices.classList.add("dn");
+
+        if (playerScore > computerScore) {
+            declare.textContent = "PLAYER VICTORY :D";
+        } else {
+            declare.textContent = "COMPUTER VICTORY :(";
+        }
+
+
+        repeat.classList.replace("dn", "db");
+        repeat.addEventListener("click", () => {
+            playerScore = 0;
+            playerScoreDiv.textContent = playerScore.toString();
+            computerScore = 0;
+            computerScoreDiv.textContent = computerScore.toString();
+            declare.classList.remove("blue", "f2");
+            declare.classList.add("f4");
+            declare.textContent = "First to 5 wins!";
+            makeYourSelection.classList.remove("dn");
+            inputChoices.classList.remove("dn");
+            playerHistory.innerHTML = "";
+            computerHistory.innerHTML = "";
+            repeat.classList.replace("db", "dn");
+
+        });
+    }
 }
 
 function game() {
-    const playerOptions = document.querySelectorAll(".inputButton");
-    console.log(playerOptions);
-    playerOptions.forEach((option) => {
-        option.addEventListener("click", () => {
-            playRound("rock", getComputerChoice());
-        });
-    });
-
-    if (playerScore >= 5 || computerScore >= 5) {
-        playerOptions.forEach((option) => {
-            option.removeEventListener("click", () => {
-                playRound("rock", getComputerChoice());
-            });
-        });
-    }
-
-
-    const rulesVictory = document.querySelector("#rulesVictory");
-
-    if (playerScore > computerScore) {
-        rulesVictory.textContent = "PLAYER VICTORY :D";
-    } else {
-        rulesVictory.textContent = "COMPUTER VICTORY :(";
-    }
-
-    const mainContainer = document.querySelector("#mainContainer");
-    const repeat = document.createElement("div");
-    repeat.classList.add("cb", "w-100", "center", "tc", "grow");
-
-    const repeatIcon = document.createElement("i");
-    repeatIcon.classList.add("fas", "fa-redo", "mv2", "fa-3x");
-
-    const repeatText = document.createElement("span");
-    repeatText.textContent = "Play again?";
-    repeatText.classList.add("db");
-
-    repeat.append(repeatIcon, repeatText);
-    mainContainer.appendChild(repeat);
 
 }
 
 // updating various parts of the page
 
-function updatePlayerScore() {
-    const playerScoreDiv = document.querySelector("#playerScore .score");
-    playerScore++;
-    playerScoreDiv.textContent = playerScore.toString();
-}
-
-function updateComputerScore() {
-    const computerScoreDiv = document.querySelector("#computerScore .score");
-    computerScore++;
-    computerScoreDiv.textContent = computerScore.toString();
-}
-
 function selectionsMade(playerSelection, computerSelection) {
-    const playerCurrent = document.querySelector("#playerCurrent .fai-large");
-    const computerCurrent = document.querySelector("#computerCurrent .fai-large");
 
     // add icon to each side's history
     createIcon(playerSelection, "player");
@@ -146,49 +141,12 @@ function createIcon(selection, side) {
 
     switch (side) {
         case "player":
-            let playerHistory = document.querySelector("#playerHistory");
             playerHistory.appendChild(icon);
             break;
         case "computer":
-            let computerHistory = document.querySelector("#computerHistory");
             computerHistory.appendChild(icon);
             break;
     }
 
 }
-
-// const container = document.querySelector("#mainContainer");
-// const content = document.createElement("div");
-//
-// content.classList.add("content");
-// content.textContent = "My first JS added div!";
-//
-// container.appendChild(content);
-// const redP = document.createElement("p");
-// redP.textContent = "I am a paragraph with red text";
-// redP.style.cssText = "color: red;";
-// container.appendChild(redP);
-//
-// const blueHeader = document.createElement("h3");
-// blueHeader.textContent = "I am a blue header";
-// blueHeader.style.cssText = "color: blue;";
-// container.appendChild(blueHeader);
-//
-// const blackPink = document.createElement("div");
-// blackPink.style.cssText = "background-color: pink; border: 2px solid black;";
-//
-// const blackPinkHeader = document.createElement("h1");
-// blackPinkHeader.textContent = "I'm in a div";
-//
-// const blackPinkParagraph = document.createElement("p");
-// blackPinkParagraph.textContent = "Me too!";
-//
-// blackPink.appendChild(blackPinkHeader);
-// blackPink.appendChild(blackPinkParagraph);
-//
-// container.appendChild(blackPink);
-
-
-
-console.log("bugger");
 game();
