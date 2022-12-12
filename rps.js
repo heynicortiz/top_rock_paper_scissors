@@ -35,9 +35,22 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    while (playerScore < 1 && computerScore < 1) {
-        alert(playRound(prompt("Please enter your selection").toLowerCase(), getComputerChoice()));
+    const playerOptions = document.querySelectorAll(".inputButton");
+    console.log(playerOptions);
+    playerOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+            playRound("rock", getComputerChoice());
+        });
+    });
+
+    if (playerScore >= 5 || computerScore >= 5) {
+        playerOptions.forEach((option) => {
+            option.removeEventListener("click", () => {
+                playRound("rock", getComputerChoice());
+            });
+        });
     }
+
 
     const rulesVictory = document.querySelector("#rulesVictory");
 
@@ -49,7 +62,7 @@ function game() {
 
     const mainContainer = document.querySelector("#mainContainer");
     const repeat = document.createElement("div");
-    repeat.classList.add("cb", "w-100", "center", "tc");
+    repeat.classList.add("cb", "w-100", "center", "tc", "grow");
 
     const repeatIcon = document.createElement("i");
     repeatIcon.classList.add("fas", "fa-redo", "mv2", "fa-3x");
@@ -117,7 +130,7 @@ function selectionsMade(playerSelection, computerSelection) {
 
 function createIcon(selection, side) {
     let icon = document.createElement("i");
-    icon.classList.add("far", "pa1", "fa-2x");
+    icon.classList.add("far", "pa1", "fai-previous");
 
     switch (selection) {
         case "rock":
@@ -175,4 +188,7 @@ function createIcon(selection, side) {
 //
 // container.appendChild(blackPink);
 
+
+
+console.log("bugger");
 game();
