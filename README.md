@@ -1,9 +1,8 @@
 ## Rock, Paper, Scissors
-This is currently a basic Rock, Paper, Scissors game written in Javascript and played via user prompts.
+This is a Rock, Paper, Scissors game written in Javascript and played via the browser.
 
-With each page load, a five-round game is initiated and the final score is displayed in the console.
+Each game is best of five with as many rounds as necessary being played. Player and computer history are shown below their most recent selection and score.
 
-From other reading, I understand that this project will be expanded upon as I progress further in The Odin Project.
 
 ## The Odin Project
 I completed this as part of [The Odin Project](https://www.theodinproject.com/lessons/foundations-rock-paper-scissors) as I work to learn JavaScript and improve on my prior web experience with HTML, CSS, and only borrowed scripts!
