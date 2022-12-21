@@ -1,4 +1,7 @@
 ## Rock, Paper, Scissors
+
+🎬 [See it in action](https://heynicortiz.github.io/top_rock_paper_scissors/) 🎬
+
 This is a Rock, Paper, Scissors game written in Javascript and played via the browser.
 
 Each game is best of five with as many rounds as necessary being played. Player and computer history are shown below their most recent selection and score.
